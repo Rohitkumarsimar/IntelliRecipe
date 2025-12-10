@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your AI Chef</title>
+    <meta name="description" content="AI-powered recipe generator that creates personalized recipes based on your ingredients and preferences">
+    <meta name="keywords" content="recipe generator, AI chef, cooking, ingredients, food">
+    <meta name="author" content="AI Recipe Generator">
+    <title>AI Recipe Generator - Your Personal AI Chef</title>
     <link rel="stylesheet" href="styles.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,11 +23,27 @@
         <form id="recipe-form">
             <div class="form-group">
                 <label for="ingredients">Ingredients or recipe:</label>
-                <textarea cols="10" rows="2" id="ingredients" name="ingredients" placeholder="E.g. Rice, milk, etc. or Chocolate cake recipe . . . " rows="2"></textarea>
+                <textarea 
+                    id="ingredients" 
+                    name="ingredients" 
+                    placeholder="E.g. Rice, milk, etc. or Chocolate cake recipe..." 
+                    rows="3"
+                    required
+                    aria-describedby="ingredients-help">
+                </textarea>
+                <small id="ingredients-help">Enter ingredients you have or describe the dish you want to make</small>
             </div>
             <div class="form-group">
                 <label for="time">Cooking Time (Optional):</label>
-                <input type="number" id="time" name="time" min="5" max="120" placeholder="e.g., 30">
+                <input 
+                    type="number" 
+                    id="time" 
+                    name="time" 
+                    min="5" 
+                    max="300" 
+                    placeholder="e.g., 30"
+                    aria-describedby="time-help">
+                <small id="time-help">Time in minutes (5-300)</small>
             </div>
             <button type="submit" id="btn">Generate Recipe</button>
         </form>

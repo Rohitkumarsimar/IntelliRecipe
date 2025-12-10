@@ -31,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return null; 
         }
 
-        else if (!validresponse(ingValue.toLowerCase())) {
-            return `It doesn't seem like a recipe. Please enter valid ingredients or food items.`
+        else if (!validresponse(ingValue)) {
+            return `It doesn't seem like a recipe. Please enter valid ingredients.`
         }
 
         else if (!timeValue) {
@@ -57,20 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //"try" for error handling       
         try {
-            recipeContainer.innerHTML = "<p><span class='loading-spinner'></span>Generating your recipe...</p>"; // Show loading message with spinner
-            
-            // SECURITY: API key should be stored securely (environment variables, server-side)
-            // For demo purposes, replace 'YOUR_API_KEY_HERE' with your actual API key
-            const API_KEY = "YOUR_API_KEY_HERE";
-            
-            if (API_KEY === "YOUR_API_KEY_HERE") {
-                recipeContainer.innerHTML = "<p style='color: red;'>Please configure your API key in the script to use this application.</p>";
-                return;
-            }
-
+            recipeContainer.innerHTML = "<p>Generating your recipe...</p>"; // Show loading message
 //API call
             const response = await fetch(
-                `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`,
+                "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCa8wlVHwBmudTBD2jKGeWshhsN-aGs8xA",
                 {
                     method: "POST",
                     headers: {
@@ -109,27 +99,10 @@ document.addEventListener("DOMContentLoaded", () => {
                `
         } catch (error) {
             console.error("Error:", error);
-            recipeContainer.innerHTML = `<div class="error-message">
-                <strong>Oops! Something went wrong:</strong><br>
-                ${error.message || "Failed to generate the recipe. Please try again later."}
-            </div>`;
+            recipeContainer.innerHTML = `<p>Error: ${error.message || "Failed to generate the recipe. Please try again later."}</p>`;
         }
     });
 });
 
-// Initialize the application
-console.log("AI Recipe Generator loaded successfully!");
-
-// Add form validation feedback
-document.addEventListener("DOMContentLoaded", () => {
-    const ingredientsInput = document.getElementById("ingredients");
-    
-    ingredientsInput.addEventListener("input", () => {
-        const value = ingredientsInput.value.trim();
-        if (value && !validresponse(value.toLowerCase())) {
-            ingredientsInput.setCustomValidity("Please enter food-related ingredients or recipe names");
-        } else {
-            ingredientsInput.setCustomValidity("");
-        }
-    });
-});
+//In the end of this year i am making my final commit, 2024 gave me best lessons about the importance of time and life.
+console.log("Happy new year!")

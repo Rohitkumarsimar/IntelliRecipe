@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
         prompt: combinedInput,
     }),
 });
+const result = await response.json();
 
 //if response is not ok, error 
             if (!response.ok) {
@@ -76,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
 
 //accessing the result from nested elements of the object (optional chaining)          
-            const rawAnswer = result?.candidates[0]?.content?.parts[0]?.text || "No recipe generated."
+            const rawAnswer = result?.candidates?.[0]?.content?.parts[0]?.text || "No recipe generated."
 
 //text formatting
            const formattedAnswer = formatBoldText(rawAnswer);

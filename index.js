@@ -59,33 +59,22 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             recipeContainer.innerHTML = "<p>Generating your recipe...</p>"; // Show loading message
 //API call
-            const response = await fetch(
-                "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCa8wlVHwBmudTBD2jKGeWshhsN-aGs8xA",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        contents: [
-                            {
-                                parts: [
-                                    {
-                                        text: combinedInput,
-                                    },
-                                ],
-                            },
-                        ],
-                    }),
-                }
-            );
+            const response = await fetch("/api/generate-recipe", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        prompt: combinedInput,
+    }),
+});
 
-
-            const result = await response.json();
+           console.log(JSON.stringify(result, null, 2));
 //if response is not ok, error 
             if (!response.ok) {
                 throw new Error(result.error.message || "Failed to generate the recipe.");
             }
+            console.log(result);
 
 //accessing the result from nested elements of the object (optional chaining)          
             const rawAnswer = result?.candidates[0]?.content?.parts[0]?.text || "No recipe generated."
@@ -104,5 +93,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-//In the end of this year i am making my final commit, 2024 gave me best lessons about the importance of time and life.
-console.log("Happy new year!")

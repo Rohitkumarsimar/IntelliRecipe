@@ -69,12 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }),
 });
 
-           console.log(JSON.stringify(result, null, 2));
 //if response is not ok, error 
             if (!response.ok) {
                 throw new Error(result.error.message || "Failed to generate the recipe.");
             }
-            console.log(result);
+            
 
 //accessing the result from nested elements of the object (optional chaining)          
             const rawAnswer = result?.candidates[0]?.content?.parts[0]?.text || "No recipe generated."
